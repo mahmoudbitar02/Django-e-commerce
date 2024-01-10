@@ -1,5 +1,6 @@
 from django.db import models
-
+from taggit.managers import TaggableManager
+from django.utils.translation import gettext_lazy as _
 # Create your models here.
 
 PRODUCT_FLAG = {
@@ -10,27 +11,17 @@ PRODUCT_FLAG = {
 
 class Product(models.Model):
     
-    name = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='product',default='default.png')
-    flag = models.CharField(max_length=10,choices=PRODUCT_FLAG)
-    price = models.FloatField()
-    sku = models.IntegerField()
-    brand = ''
-    tags = ''
-    subtitle = models.TextField(max_length=500)
-    describtion = models.TextField(max_length=20000)
-    '''
-    name 
-    flag 
-    image 
-    price
-    sku
-    brand
-    tags
-    subtitle
-    describtion
-
-    '''
+    name = models.CharField(_('name'), max_length=100)
+    image = models.ImageField(_('image'),upload_to='product',default='default.png')
+    flag = models.CharField(_('flag'),max_length=10,choices=PRODUCT_FLAG)
+    price = models.FloatField(_('price'))
+    sku = models.IntegerField(_('sku'))
+    brand = models.ForeignKey('brand',verbose_name=_('brand'),related_name='product_brand',on_delete=models.CASCADE)
+    tags = TaggableManager()
+    subtitle = models.TextField(_('sbtitle'),max_length=500)
+    describtion = models.TextField(_('describtion'),max_length=20000)
+    def __str__(self):
+        return self.name
 
 class Produkt_images(models.Model):
     pass
@@ -42,9 +33,9 @@ class Produkt_images(models.Model):
     '''
 
 class Brand(models.Model):
-    pass
+    
     '''
-    name 
+    name
     image
 
     '''
