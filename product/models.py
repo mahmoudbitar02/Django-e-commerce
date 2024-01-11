@@ -28,13 +28,13 @@ class Product(models.Model):
 
 class Produkt_images(models.Model):
     product = models.ForeignKey(Product,verbose_name= _('product'), related_name='product_image', on_delete=models.CASCADE)
-    image =models.ImageField(_('image'),uplode_to='product_image')
+    image =models.ImageField(_('image'),upload_to='product_image')
     def __str__ (self):
         return str(self.product)
 
 class Brand(models.Model):
     name = models.CharField(_('name'), max_length=100)
-    image = image =models.ImageField(_('image'),uplode_to='brand')
+    image = image =models.ImageField(_('image'),upload_to='brand')
     def __str__ (self):
         return self.name
 
@@ -44,7 +44,7 @@ class Reviews(models.Model):
     user = models.ForeignKey(User,verbose_name=_('user'),related_name='review_author',on_delete=models.SET_NULL, null=True,blank=True)
     product = models.ForeignKey(Product,verbose_name= _('product'), related_name='product_review', on_delete=models.CASCADE)
     comment = models.CharField(_('comment'),max_length=200)
-    rate = models.IntegerField(-('rate'))
+    rate = models.IntegerField(_('rate'))
     created_at = models.DateTimeField(default=timezone.now)
     def __str__ (self):
         return str(self.product)
