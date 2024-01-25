@@ -24,6 +24,7 @@ class Product(models.Model):
     subtitle = models.TextField(_('sbtitle'),max_length=500)
     describtion = models.TextField(_('describtion'),max_length=20000)
     slug =models.SlugField(null=True,blank=True)
+    quantity = models.IntegerField()
 
     def __str__(self):
         return self.name
