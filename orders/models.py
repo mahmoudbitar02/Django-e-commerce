@@ -6,6 +6,40 @@ from utils.generate_code import generate_code
 
 # Create your models here.
 
+CART_STATUS =(
+    ('Inprogress','Inprogress'),
+    ('Completed','Completed'),
+
+)
+
+
+class Cart(models.Model):
+    
+    user = models.ForeignKey(User, related_name='user_cart',on_delete=models.SET_NULL,null=True,blank=True)
+    cart_status = models.CharField(max_length=12, choices=CART_STATUS,default='Inprogress')
+    
+   # def __str__(self):
+    #    return self.order_code
+    
+
+
+class CartDetail(models.Model):
+    cart = models.ForeignKey(Cart,related_name='cart_detail',on_delete=models.CASCADE)
+    product = models.ForeignKey(Product,related_name='cart_product',on_delete=models.SET_NULL,null=True,blank=True)
+    price = models.FloatField()
+    total = models.FloatField(null=True,blank=True)
+    quantity = models.IntegerField(default=1)
+
+    def __str__(self):
+        return str(self.cart)
+    def save(self, *args, **kwargs):
+       self.total = self.price * self.quantity
+       
+       super(CartDetail, self).save(*args, **kwargs) 
+
+
+
+
 ORDER_STATUS =(
     ('Recieved','Recieved'),
     ('Processed','Processed'),
@@ -36,4 +70,4 @@ class OrderDetail(models.Model):
     def save(self, *args, **kwargs):
        self.total = self.price * self.quantity
        
-       super(OrderDetail, self).save(*args, **kwargs) # Call the real save() method
+       super(OrderDetail, self).save(*args, **kwargs) 
