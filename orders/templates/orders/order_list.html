@@ -55,7 +55,7 @@
                             <div class="orderlist">
                                 <div class="orderlist-head">
                                     <h5>order#01</h5>
-                                    <h5>order recieved</h5>
+                                    <h5>{{object.order_status}}</h5>
                                 </div>
                                 <div class="orderlist-body">
                                     <div class="row">
@@ -85,7 +85,7 @@
                                             <ul class="orderlist-details">
                                                 <li>
                                                     <h6>order id</h6>
-                                                    <p>14667</p>
+                                                    <p>{{object.order_code}}</p>
                                                 </li>
                                                 <li>
                                                     <h6>Total Item</h6>
@@ -93,11 +93,17 @@
                                                 </li>
                                                 <li>
                                                     <h6>Order Time</h6>
-                                                    <p>7th February 2021</p>
+                                                    
+                                                    
+                                                    <p>{{object.order_date|date:'jS F o'}}</p>
+
                                                 </li>
                                                 <li>
                                                     <h6>Delivery Time</h6>
-                                                    <p>12th February 2021</p>
+                                                    
+                                                    <p>{{object.delivery_date|date:'jS F'}}</p>
+
+
                                                 </li>
                                             </ul>
                                         </div>
@@ -141,6 +147,7 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
+                                                      {% for product in object.order_detail.all %}
                                                         <tr>
                                                             <td class="table-serial"><h6>01</h6></td>
                                                             <td class="table-image"><img src="images/product/01.jpg" alt="product"></td>
@@ -149,38 +156,9 @@
                                                             <td class="table-brand"><h6>Fresh Company</h6></td>
                                                             <td class="table-quantity"><h6>3</h6></td>
                                                         </tr>
-                                                        <tr>
-                                                            <td class="table-serial"><h6>02</h6></td>
-                                                            <td class="table-image"><img src="images/product/02.jpg" alt="product"></td>
-                                                            <td class="table-name"><h6>product name</h6></td>
-                                                            <td class="table-price"><h6>$19<small>/kilo</small></h6></td>
-                                                            <td class="table-brand"><h6>Radhuni Masala</h6></td>
-                                                            <td class="table-quantity"><h6>5</h6></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="table-serial"><h6>03</h6></td>
-                                                            <td class="table-image"><img src="images/product/03.jpg" alt="product"></td>
-                                                            <td class="table-name"><h6>product name</h6></td>
-                                                            <td class="table-price"><h6>$19<small>/kilo</small></h6></td>
-                                                            <td class="table-brand"><h6>Pran Prio</h6></td>
-                                                            <td class="table-quantity"><h6>2</h6></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="table-serial"><h6>04</h6></td>
-                                                            <td class="table-image"><img src="images/product/04.jpg" alt="product"></td>
-                                                            <td class="table-name"><h6>product name</h6></td>
-                                                            <td class="table-price"><h6>$19<small>/kilo</small></h6></td>
-                                                            <td class="table-brand"><h6>Real Food</h6></td>
-                                                            <td class="table-quantity"><h6>3</h6></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="table-serial"><h6>05</h6></td>
-                                                            <td class="table-image"><img src="images/product/05.jpg" alt="product"></td>
-                                                            <td class="table-name"><h6>product name</h6></td>
-                                                            <td class="table-price"><h6>$19<small>/kilo</small></h6></td>
-                                                            <td class="table-brand"><h6>Rdhuni Company</h6></td>
-                                                            <td class="table-quantity"><h6>7</h6></td>
-                                                        </tr>
+                                                      
+                                                      {% endfor %}
+                                                      
                                                     </tbody>
                                                 </table>
                                             </div>
