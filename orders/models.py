@@ -71,3 +71,5 @@ class OrderDetail(models.Model):
        self.total = self.price * self.quantity
        
        super(OrderDetail, self).save(*args, **kwargs) 
+
+       
