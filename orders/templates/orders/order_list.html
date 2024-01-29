@@ -54,7 +54,7 @@
                         {% for object in orders %}          
                             <div class="orderlist">
                                 <div class="orderlist-head">
-                                    <h5>order#01</h5>
+                                    <h5>order {{ forloop.counter }}</h5>
                                     <h5>{{object.order_status}}</h5>
                                 </div>
                                 <div class="orderlist-body">
@@ -62,20 +62,20 @@
                                         <div class="col-lg-12">
                                             <div class="order-track">
                                                 <ul class="order-track-list">
-                                                    <li class="order-track-item active">
-                                                        <i class="icofont-check"></i>
+                                                    <li class="order-track-item {% if object.order_status == 'Recieved' or object.order_status == 'Processed' or object.order_status == 'Shipped' or object.order_status == 'Delivered'%} active {% endif %}">
+                                                        <i class="icofont-{% if object.order_status == 'Recieved' or object.order_status == 'Processed' or object.order_status == 'Shipped' or object.order_status == 'Delivered'%}check{% else %}close{% endif %}"></i>
                                                         <span>order recieved</span>
                                                     </li>
-                                                    <li class="order-track-item">
-                                                        <i class="icofont-close"></i>
+                                                    <li class="order-track-item {% if object.order_status == 'Processed' or object.order_status == 'Shipped' or object.order_status == 'Delivered'%} active {% endif %}">
+                                                        <i class="icofont-{% if object.order_status == 'Processed' or object.order_status == 'Shipped' or object.order_status == 'Delivered'%}check{% else %}close{% endif %}"></i>
                                                         <span>order processed</span>
                                                     </li>
-                                                    <li class="order-track-item">
-                                                        <i class="icofont-close"></i>
+                                                    <li class="order-track-item {% if object.order_status == 'Shipped' or object.order_status == 'Delivered'%} active {% endif %}">
+                                                        <i class="icofont-{% if object.order_status == 'Shipped' or object.order_status == 'Delivered'%}check{% else %}close{% endif %}"></i>
                                                         <span>order shipped</span>
                                                     </li>
-                                                    <li class="order-track-item">
-                                                        <i class="icofont-close"></i>
+                                                    <li class="order-track-item {% if object.order_status == 'Delivered'%} active {% endif %}">
+                                                        <i class="icofont-{% if object.order_status == 'Delivered'%}check{% else %}close{% endif %}"></i>
                                                         <span>order delivered</span>
                                                     </li>
                                                 </ul>
@@ -89,7 +89,7 @@
                                                 </li>
                                                 <li>
                                                     <h6>Total Item</h6>
-                                                    <p>6 Items</p>
+                                                    <p>{{object.order_detail.all|length}} Items</p>
                                                 </li>
                                                 <li>
                                                     <h6>Order Time</h6>
@@ -149,12 +149,12 @@
                                                     <tbody>
                                                       {% for product in object.order_detail.all %}
                                                         <tr>
-                                                            <td class="table-serial"><h6>01</h6></td>
-                                                            <td class="table-image"><img src="images/product/01.jpg" alt="product"></td>
-                                                            <td class="table-name"><h6>product name</h6></td>
-                                                            <td class="table-price"><h6>$19<small>/kilo</small></h6></td>
-                                                            <td class="table-brand"><h6>Fresh Company</h6></td>
-                                                            <td class="table-quantity"><h6>3</h6></td>
+                                                            <td class="table-serial"><h6>{{ forloop.counter }}</h6></td>
+                                                            <td class="table-image"><img src="{{product.product.image.url}}" alt="product"></td>
+                                                            <td class="table-name"><h6>{{product.product}}</h6></td>
+                                                            <td class="table-price"><h6>${{product.price}}<small></small></h6></td>
+                                                            <td class="table-brand"><h6>{{product.product.brand}}</h6></td>
+                                                            <td class="table-quantity"><h6>{{product.quantity}}</h6></td>
                                                         </tr>
                                                       
                                                       {% endfor %}
