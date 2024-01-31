@@ -8,3 +8,4 @@ from .models import Order,OrderDetail
 class OrderList(ListView):
     model = Order
     context_object_name = 'orders'
+    paginate_by = 1
