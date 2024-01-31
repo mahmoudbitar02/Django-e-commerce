@@ -1,0 +1,20 @@
+- brand_detail: pagination
+- generate dummy data
+- queryset API ---> debuging
+- users
+- dashbord: charts
+- cart
+- checkout
+- coupons
+- home
+- nav, footer
+- payment
+- ajax
+- celery
+- redis
+- docker
+- caching
+- testing
+- debloy
+- aws
+- vueje basics
