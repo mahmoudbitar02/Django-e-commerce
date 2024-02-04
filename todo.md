@@ -1,4 +1,4 @@
-- brand_detail: pagination
+
 
 - queryset API ---> debuging
 - users
