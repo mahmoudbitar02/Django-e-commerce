@@ -20,7 +20,18 @@ def query_debug (request):
     #data=Product.objects.filter(Q(name__contains='Dustin') | Q(price__gt=50)) # name Dusten or price großer als 50 (|=or) WICHTIG: import Q 
     #data=Product.objects.filter(Q(name__contains='Dustin') & Q(price__gt=50)) # name Dusten und price großer als 50 (&=and) WICHTIG import Q
     #data=Product.objects.filter(price=F('quantity')) # spaltenwert Price = spaltenwert quantity WICHTIG: import F
-    data=Product.objects.all().order_by('-name') # sortieren aufsteigend ohne (-), absteigend mit (-) vor dem name
+    #data=Product.objects.all().order_by('-name') # sortieren aufsteigend ohne (-), absteigend mit (-) vor dem name
+    #data=Product.objects.earliest('name') # sortiert und brngt der erste Name WICHTIG: kein loop in html
+    #data=Product.objects.latest('name') #sortiert und brngt der letzte Name WICHTIG: kein loop in html
+    #data=Product.objects.values_list('name','price','brand') # bestimmte spalten holen// .distinct() = kein mehrmalig
+    #data=Product.objects.only('name','id',) # holt nur der Name und ID aufpassen beim loop verwenden!!
+    #data=Product.objects.defer('brand') # ausschließen brand
+    data=Product.objects.select_related('brand').all() # select_related = brand wird mit dem selber Query angeschlossen, d.h. query geht einmal und holt die Daten aus dem DB, andersrum wird zu jedem Product ein query gemacht um den Brand aus dem DB zu holen(nur bei Foreignkey oder one to one relation)
+    data=Product.objects.prefetch_related('brand').all() # select_related = brand wird mit dem selber Query angeschlossen, d.h. query geht einmal und holt die Daten aus dem DB, andersrum wird zu jedem Product ein query gemacht um den Brand aus dem DB zu holen(nur bei many to many relation)
+
+
+
+
     return render(request,'product/productlist.html',{'data':data})
 
 class ProductList(ListView):
