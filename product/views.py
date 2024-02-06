@@ -1,10 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
 from .models import Product,Produkt_images,Brand,Reviews
 from django.db.models import Q,F,Value,Func
 from django.db.models.aggregates import Sum, Avg, Min, Max, Count
 from django.db.models.functions import Concat
 from django.db.models import ExpressionWrapper,DecimalField,FloatField
+from.forms import ProductReviewForm
 # Create your views here.
 
 
@@ -52,6 +53,24 @@ class ProductList(ListView):
 
 class ProductDetail(DetailView):
     model = Product
+
+
+
+def add_review(request,slug):
+    product=Product.objects.get(slug=slug)
+    if request.method=='POST':
+        form= ProductReviewForm(request.POST)
+        if form.is_valid():
+            myform=form.save(commit=False)
+            myform.user=request.user 
+            myform.product=product
+            myform.save()
+            return redirect(f'/products/{product.slug}')
+
+
+    
+
+
     
 
 class BrandList(ListView):
