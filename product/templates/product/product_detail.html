@@ -64,13 +64,24 @@
                                 <p>SKU:<span>{{object.sku}}</span></p>
                                 <p>BRAND:<a href="#">{{object.brand}}</a></p>
                             </div>
-                            <div class="details-rating">
-                                <i class="active icofont-star"></i>
-                                <i class="active icofont-star"></i>
-                                <i class="active icofont-star"></i>
-                                <i class="active icofont-star"></i>
-                                <i class="icofont-star"></i>
-                                <a href="#">(3 reviews)</a>
+                            <div class="product-rating">
+                                <i class="icofont-star {% if object.get_avg_rate.rate_avg > 0 %} active
+                                  
+                                {% endif %}"></i>
+                                <i class="icofont-star {% if object.get_avg_rate.rate_avg > 1 %} active
+                                  
+                                {% endif %}"></i>
+                                <i class="icofont-star {% if object.get_avg_rate.rate_avg > 2 %} active
+                                  
+                                {% endif %}"></i>
+                                <i class="icofont-star {% if object.get_avg_rate.rate_avg > 3 %} active
+                                  
+                                {% endif %}"></i>
+                                <i class="icofont-star {% if object.get_avg_rate.rate_avg > 4 %} active
+                                  
+                                {% endif %}"></i>
+                                <a href="product-video.html">({{product.product_review.all|length}})</a>
+                                <p>{{product.get_avg_rate.rate_avg}}</p>
                             </div>
                             <h3 class="details-price">
                                 <del>$38.00</del>

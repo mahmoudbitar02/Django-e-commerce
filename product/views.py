@@ -37,10 +37,10 @@ def query_debug (request):
      #   full_name= Concat('name',Value(' '),'flag') # zwei spalten zusammenführen WICHTIG: import Concat 
     #)
 
-    #dis_price=ExpressionWrapper(F('price')*.8,output_field=DecimalField()) 
-    #data=Product.objects.annotate(discount_price=dis_price) # füge neue Spalte mit dem neuen Prise 
+    dis_price=ExpressionWrapper(F('price')*.8,output_field=DecimalField()) 
+    data=Product.objects.annotate(discount_price=dis_price) # füge neue Spalte mit dem neuen Prise 
 
-    
+
 
 
     return render(request,'product/productlist.html',{'data':data})
