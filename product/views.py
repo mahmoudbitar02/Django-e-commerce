@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
-from django.db.models import Count
 from .models import Product,Produkt_images,Brand,Reviews
-from django.db.models import Q,F
+from django.db.models import Q,F,Value,Func
+from django.db.models.aggregates import Sum, Avg, Min, Max, Count
+from django.db.models.functions import Concat
+from django.db.models import ExpressionWrapper,DecimalField,FloatField
 # Create your views here.
 
 
@@ -26,10 +28,19 @@ def query_debug (request):
     #data=Product.objects.values_list('name','price','brand') # bestimmte spalten holen// .distinct() = kein mehrmalig
     #data=Product.objects.only('name','id',) # holt nur der Name und ID aufpassen beim loop verwenden!!
     #data=Product.objects.defer('brand') # ausschließen brand
-    data=Product.objects.select_related('brand').all() # select_related = brand wird mit dem selber Query angeschlossen, d.h. query geht einmal und holt die Daten aus dem DB, andersrum wird zu jedem Product ein query gemacht um den Brand aus dem DB zu holen(nur bei Foreignkey oder one to one relation)
-    data=Product.objects.prefetch_related('brand').all() # select_related = brand wird mit dem selber Query angeschlossen, d.h. query geht einmal und holt die Daten aus dem DB, andersrum wird zu jedem Product ein query gemacht um den Brand aus dem DB zu holen(nur bei many to many relation)
+    #data=Product.objects.select_related('brand').all() # select_related = brand wird mit dem selber Query angeschlossen, d.h. query geht einmal und holt die Daten aus dem DB, andersrum wird zu jedem Product ein query gemacht um den Brand aus dem DB zu holen(nur bei Foreignkey oder one to one relation)
+    #data=Product.objects.prefetch_related('brand').all() # select_related = brand wird mit dem selber Query angeschlossen, d.h. query geht einmal und holt die Daten aus dem DB, andersrum wird zu jedem Product ein query gemacht um den Brand aus dem DB zu holen(nur bei many to many relation)
+    #data=Product.objects.aggregate(min_price=Min('price'),avg_peice=Avg('price')) # plus minus max min etc. 
+    #data=Product.objects.annotate(is_new=Value(True)) # füge eine neue Spalte mit der Value True
+    #data=Product.objects.annotate(is_new=F('quantity')+1 -1 *2) # man kann die felder beliebig gestalten 
+    #data=Product.objects.annotate(
+     #   full_name= Concat('name',Value(' '),'flag') # zwei spalten zusammenführen WICHTIG: import Concat 
+    #)
 
+    #dis_price=ExpressionWrapper(F('price')*.8,output_field=DecimalField()) 
+    #data=Product.objects.annotate(discount_price=dis_price) # füge neue Spalte mit dem neuen Prise 
 
+    
 
 
     return render(request,'product/productlist.html',{'data':data})
