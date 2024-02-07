@@ -62,10 +62,10 @@ def add_review(request,slug):
         form= ProductReviewForm(request.POST)
         if form.is_valid():
             myform=form.save(commit=False)
-            myform.user=request.user 
+            myform.User = request.user  
             myform.product=product
             myform.save()
-            return redirect(f'/products/{product.slug}')
+    return redirect(f'/products/{product.slug}')
 
 
     
@@ -108,4 +108,5 @@ class BrandDetail(ListView):
         return context
     
     
-    
+
+
