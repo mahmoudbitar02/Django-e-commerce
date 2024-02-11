@@ -79,6 +79,13 @@ def add_review(request,slug):
             reviews = Reviews.objects.filter(product=product)
             html = render_to_string('include/all_reviews.html',{'reviews':reviews, request:request})
             return JsonResponse({'result':html})
+        
+
+
+
+
+           
+
 
 
     
