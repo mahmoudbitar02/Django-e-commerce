@@ -92,7 +92,7 @@
                                           
                                         {% endif %}"></i>
                                         <a href="product-video.html">({{product.product_review.all|length}})</a>
-                                        <p>{{product.get_avg_rate.rate_avg}}</p>
+                                       
                                     </div>
                                     <h6 class="product-name">
                                         <a href="{% url 'products:product_detail' product.slug %}">{{product}}</a>

@@ -1,6 +1,6 @@
 
 
-- queryset API ---> debuging
+- PROBLEM WITH DROP REVIEW ON product_detail TEMPLATES
 - users
 - dashbord: charts
 - cart

@@ -6,6 +6,10 @@ from django.db.models.aggregates import Sum, Avg, Min, Max, Count
 from django.db.models.functions import Concat
 from django.db.models import ExpressionWrapper,DecimalField,FloatField
 from.forms import ProductReviewForm
+from django.http import JsonResponse
+from django.template.loader import render_to_string
+
+
 # Create your views here.
 
 
@@ -54,18 +58,34 @@ class ProductList(ListView):
 class ProductDetail(DetailView):
     model = Product
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["reviews"] = Reviews.objects.filter(product=self.get_object())
+        return context
+    
+
 
 
 def add_review(request,slug):
-    product=Product.objects.get(slug=slug)
-    if request.method=='POST':
-        form= ProductReviewForm(request.POST)
+    product = Product.objects.get(slug=slug)
+    if request.method == 'POST':
+        form = ProductReviewForm(request.POST)
         if form.is_valid():
-            myform=form.save(commit=False)
-            myform.User = request.user  
-            myform.product=product
+            myform = form.save(commit=False)
+            myform.User = request.user
+            myform.product = product 
             myform.save()
-    return redirect(f'/products/{product.slug}')
+
+            reviews = Reviews.objects.filter(product=product)
+            html = render_to_string('include/all_reviews.html',{'reviews':reviews, request:request})
+            return JsonResponse({'result':html})
+        
+
+
+
+
+           
+
 
 
     
