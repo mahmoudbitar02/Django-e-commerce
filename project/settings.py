@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'django_extensions',
+    'rest_framework',
     'debug_toolbar',
     'taggit',
     'product',
@@ -46,6 +47,11 @@ INSTALLED_APPS = [
     'settings'
     
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 50
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
