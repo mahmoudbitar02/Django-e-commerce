@@ -55,8 +55,3 @@ def seed_product(n):
 #seed_brand(20)
 seed_product(3000)
 
-
-
-
-
-
