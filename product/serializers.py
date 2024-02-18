@@ -42,9 +42,10 @@ class ProductListSerializer(serializers.ModelSerializer):
 
 
 class ProductReviewsSerializer(serializers.ModelSerializer):
+    user = serializers.StringRelatedField()
     class Meta:
         model=Reviews
-        fields='__all__'
+        fields=['comment','rate','created_at','user']
 
 class ProductDetailSerializer(serializers.ModelSerializer):
     images= ProduktImagesSerializer(source='product_image',many=True)
