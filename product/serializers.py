@@ -11,8 +11,8 @@ class BrandSerializer(serializers.ModelSerializer):
 
 
 class ProductSerializer(serializers.ModelSerializer):
-    brand= BrandSerializer()
-    class Meta:
-        
+    #brand= BrandSerializer()  # damit alle Brand-fields auf der api seite ersehtlich sind 
+    brand = serializers.StringRelatedField() # hier wird nur der name des Brandes gezeigt 
+    class Meta: 
         model=Product
         fields='__all__'
