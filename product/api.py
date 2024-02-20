@@ -5,6 +5,7 @@ from rest_framework import generics
 from .serializers import ProductDetailSerializer,ProductListSerializer,BrandDetailSerializer,BrandListSerializer
 from .models import Product,Brand
 from .pagination import MyPagination
+import django_filters.rest_framework
 
 
 
@@ -20,6 +21,8 @@ class ProductListApi(generics.ListCreateAPIView):
     queryset=Product.objects.all()
     serializer_class=ProductListSerializer
     pagination_class=MyPagination
+    filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
+    filterset_fields=['name','brand','price','flag']
 
 class ProductDetailApi(generics.RetrieveUpdateDestroyAPIView):
     queryset=Product.objects.all()
