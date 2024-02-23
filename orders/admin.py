@@ -12,8 +12,12 @@ class OrderDetailAdmin(admin.ModelAdmin):
     list_display = ['order','product','price','total']
     list_filter = ['price','quantity']
 
+class CartDetailAdmin(admin.ModelAdmin):
+    list_display= ['id','cart','product_id']
+
+
 admin.site.register(Order,OrderAdmin)
 admin.site.register(OrderDetail,OrderDetailAdmin)
 admin.site.register(Cart)
-admin.site.register(CartDetail)
+admin.site.register(CartDetail,CartDetailAdmin)
 
