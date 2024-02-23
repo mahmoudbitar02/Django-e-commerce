@@ -4,8 +4,19 @@ from rest_framework.response import Response
 from rest_framework import generics
 from .models import Order, OrderDetail, Cart,CartDetail
 from product.models import Product
-from .serializers import CartSerializer, CartDetailSerializer
+from .serializers import CartSerializer, CartDetailSerializer,OrderDetailSerializer,OrderSerializer
 from django.contrib.auth.models import User
+
+class OrderListApi(generics.ListAPIView):
+    serializer_class=OrderSerializer
+    queryset=Order.objects.all()
+
+    def list(self, request,*args,**kwargs):
+        user = User.objects.get(username=self.kwargs['username'])
+        queryset = self.get_queryset().filter(user=user)
+        serializer = OrderSerializer(queryset, many=True)
+        return Response(serializer.data)
+
 
 class CartDetailCreateApi(generics.GenericAPIView): # GenericAPIView damit wir die List,Detail,Crete bearbeiten können override
     serializer_class=CartDetailSerializer
