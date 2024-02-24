@@ -10,7 +10,7 @@ class CartDetailSerializer(serializers.ModelSerializer):
 
 
 class CartSerializer(serializers.ModelSerializer):
-    cart_detail=CartDetailSerializer(many=True)#wenn cart_detail = der name vom dem relation muss hier kein Source hinzugefügt (source=cart_detail,many=True)
+    cart_detail=CartDetailSerializer(many=True)#wenn cart_detail = der name von dem relation muss hier kein Source hinzugefügt (source=cart_detail,many=True)
     class Meta:
         model=Cart
         fields='__all__'
