@@ -11,7 +11,7 @@ class OrderListApi(generics.ListAPIView):
     serializer_class=OrderSerializer
     queryset=Order.objects.all()
 
-    def list(self, request,*args,**kwargs):
+    def list(self, request,*args,**kwargs):# um die Methoud umzuschreiben bzw. override 
         user = User.objects.get(username=self.kwargs['username'])
         queryset = self.get_queryset().filter(user=user)
         serializer = OrderSerializer(queryset, many=True)
@@ -41,7 +41,7 @@ class CreateOrder(generics.GenericAPIView):
     
 
 
-class CartDetailCreateApi(generics.GenericAPIView): # GenericAPIView damit wir die List,Detail,Crete bearbeiten können override
+class CartDetailCreateApi(generics.GenericAPIView): # GenericAPIView damit wir die List,Detail,Create bearbeiten können override
     serializer_class=CartDetailSerializer
     def get(self,request,*args,**kwargs):
         user = User.objects.get(username=self.kwargs['username'])
