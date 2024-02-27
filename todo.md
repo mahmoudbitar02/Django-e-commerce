@@ -1,15 +1,12 @@
-
-
-
+- translation 
 - users
-- dashbord: charts
+- orders
+- simple dashbord: charts
 - cart
 - checkout
 - coupons
 - home
-
 - payment
-
 - celery
 - redis
 - docker
