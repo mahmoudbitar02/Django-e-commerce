@@ -58,6 +58,7 @@ REST_FRAMEWORK = {
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+   # "django.middleware.locale.LocaleMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -151,3 +152,11 @@ INTERNAL_IPS = [
     "127.0.0.1",
     # ...
 ]
+
+#LANGUAGES = [
+ #   ("de", ("German")),
+  #  ("en", ("English")),
+#]
+
+
+LOCALE_PATH = ['locale']
