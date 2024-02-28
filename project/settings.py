@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'django_extensions',
     'rest_framework',
     'django_filters',
+    'tof',
+    'rosetta',
     'debug_toolbar',
     'taggit',
     'product',
