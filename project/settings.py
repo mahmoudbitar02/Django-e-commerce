@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'django_extensions',
     'rest_framework',
     'django_filters',
+    'tof',
+    'rosetta',
     'debug_toolbar',
     'taggit',
     'product',
@@ -58,7 +60,7 @@ REST_FRAMEWORK = {
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-   # "django.middleware.locale.LocaleMiddleware",
+    "django.middleware.locale.LocaleMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -122,7 +124,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'ar'
+LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
@@ -153,10 +155,10 @@ INTERNAL_IPS = [
     # ...
 ]
 
-#LANGUAGES = [
- #   ("de", ("German")),
-  #  ("en", ("English")),
-#]
+LANGUAGES = [
+    ("ar", ("Arabic")),
+    ("en", ("English")),
+]
 
 
-LOCALE_PATH = ['locale']
+LOCALE_PATHS = ['locale']
