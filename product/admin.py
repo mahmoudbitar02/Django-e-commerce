@@ -2,15 +2,16 @@ from django.contrib import admin
 
 # Register your models here.
 from .models import Product, Produkt_images, Brand, Reviews
+from tof.admin import TofAdmin, TranslationTabularInline
 
 
 class ProductImagesAdmin (admin.TabularInline):
     model = Produkt_images
 
-class ProductAdmin(admin.ModelAdmin):
+class ProductAdmin(TofAdmin):
     list_display=['id','name','brand','price','subtitle']
     list_filter=['brand','price']
-    inlines = [ProductImagesAdmin]
+    inlines = [ProductImagesAdmin,TranslationTabularInline]
     search_fields = ['name','subtitle','describtion']
     list_editable = ['name','brand','price']
     
