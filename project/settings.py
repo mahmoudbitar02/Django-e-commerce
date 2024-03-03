@@ -168,3 +168,6 @@ LOCALE_PATHS = ['locale']
 LOGIN_REDIRECT_URL = '/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+AUTHENTICATION_BACKENDS = ['accounts.backend.EmailBackend']
