@@ -4,7 +4,7 @@ os.environ["DJANGO_SETTINGS_MODULE"] = "project.settings"
 
 django.setup()
 
-from faker import Faker
+from faker import Faker 
 import random
 from product.models import Product, Brand
 
