@@ -42,13 +42,15 @@ INSTALLED_APPS = [
     'django_extensions',
     'rest_framework',
     'django_filters',
+    "django_bootstrap5",
     'tof',
     'rosetta',
     'debug_toolbar',
     'taggit',
     'product',
     'orders',
-    'settings'
+    'settings',
+    
     
 ]
 
@@ -171,3 +173,4 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
 AUTHENTICATION_BACKENDS = ['accounts.backend.EmailBackend']
+

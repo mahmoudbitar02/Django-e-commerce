@@ -1,11 +1,32 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Profile, Address, ContactNumbers
+from .forms import SignupForm,ActivateUserForm
+from django.core.mail import send_mail
 
 # Create your views here.
 def signup(request):
-    pass
+    if request.method == 'POST':
+        form = SignupForm(request.POST)
+        if form.is_valid():
+            username =form.cleaned_data['username']
+            email =form.cleaned_data['email']
+            form.save()
+        
+            profile =Profile.objects.get(user__username=username)
+            send_mail(
+                "Activate Your Account",
+                f"welcome {username} \n use this code {{profile.code}} to activate your account...\n Green_store",
+                "bitarmahmoud909@gmail.com",
+                [email],
+                fail_silently=False,
+            )
+        return redirect(f'/accounts/{username}/activate')
 
-def activate_account(requesst):
+    else:
+        form = SignupForm()
+    return render (request,'accounts/signup.html',{'form':form})
+
+def activate_account(requesst,username):
     pass
 
 
