@@ -1,7 +1,7 @@
 
-- users
+
 - orders
-- simple dashbord: charts
+
 - cart
 - checkout
 - coupons
