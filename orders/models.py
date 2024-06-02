@@ -39,10 +39,10 @@ class CartDetail(models.Model):
     def __str__(self):
         return str(self.product)
     
-    def save(self, *args, **kwargs):
-      self.total = round (self.price * self.quantity,2)
+    # def save(self, *args, **kwargs):
+    #   self.total = round (self.price * self.quantity,2)
        
-      super(CartDetail, self).save(*args, **kwargs) 
+    #   super(CartDetail, self).save(*args, **kwargs) 
 
 
 
