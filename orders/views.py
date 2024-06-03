@@ -23,6 +23,8 @@ def add_to_cart(request):
     cart_detail.save()
     return redirect(f'/products/{product.slug}')
 
+
+
 def remove_from_cart(request):
     pass
 
@@ -32,3 +34,6 @@ def checkout(request):
 
 def invoice(request):
     pass
+
+
+
