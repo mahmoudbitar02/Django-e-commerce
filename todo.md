@@ -1,17 +1,21 @@
-
-- users
-- orders
-- simple dashbord: charts
-- cart
-- checkout
 - coupons
-- home
-- payment
 - celery
 - redis
 - docker
-- caching
+
 - testing
+- payment
 - debloy
+
+__________________________________________________________
 - aws
 - vueje basics
+
+
+
+
+
+
+
+
+
