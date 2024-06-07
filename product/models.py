@@ -3,6 +3,8 @@ from taggit.managers import TaggableManager
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
 from django.contrib.auth.models import User
+from django.utils.text import slugify
+from django.db.models.aggregates import Avg
 # Create your models here.
 
 PRODUCT_FLAG = {
@@ -23,8 +25,22 @@ class Product(models.Model):
     subtitle = models.TextField(_('sbtitle'),max_length=500)
     describtion = models.TextField(_('describtion'),max_length=20000)
     slug =models.SlugField(null=True,blank=True)
+    quantity = models.IntegerField()
+
     def __str__(self):
         return self.name
+    def save(self, *args, **kwargs):
+       self.slug = slugify(self.name)
+       
+       super(Product, self).save(*args, **kwargs) 
+# instance method
+    def get_avg_rate(self):
+        avg = self.product_review.aggregate(rate_avg=Avg('rate'))
+        return avg
+
+
+
+
 
 class Produkt_images(models.Model):
     product = models.ForeignKey(Product,verbose_name= _('product'), related_name='product_image', on_delete=models.CASCADE)
@@ -35,8 +51,13 @@ class Produkt_images(models.Model):
 class Brand(models.Model):
     name = models.CharField(_('name'), max_length=100)
     image = image =models.ImageField(_('image'),upload_to='brand')
+    slug =models.SlugField(null=True,blank=True)
     def __str__ (self):
         return self.name
+    def save(self, *args, **kwargs):
+       self.slug = slugify(self.name)
+       
+       super(Brand, self).save(*args, **kwargs) # Call the real save() method
 
 
 
@@ -49,3 +70,6 @@ class Reviews(models.Model):
     def __str__ (self):
         return str(self.product)
     
+
+
+

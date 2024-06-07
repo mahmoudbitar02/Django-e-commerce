@@ -15,14 +15,30 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include,re_path
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
+    path("accounts/", include("django.contrib.auth.urls")),
+    path("accounts/", include("accounts.urls", namespace='accounts')),
+
     path('admin/', admin.site.urls),
+    path('products/',include('product.urls',namespace='products')),
+    path('orders/',include('orders.urls',namespace='orders')),
+    path("__debug__/", include("debug_toolbar.urls")),
+    path('',include('settings.urls',namespace='settings')),
+    path('api-auth/', include('rest_framework.urls')),
+    path("i18n/", include("django.conf.urls.i18n")),
+    re_path(r'^rosetta/', include('rosetta.urls')),
+    
+
 ]
 
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+
+
