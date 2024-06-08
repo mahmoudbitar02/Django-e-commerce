@@ -57,15 +57,12 @@
             <link rel="stylesheet" href="{% static 'ar/vendor/slickslider/slick.min.css' %}">
             <link rel="stylesheet" href="{% static 'ar/vendor/niceselect/nice-select.min.css' %}">
             <link rel="stylesheet" href="{% static 'ar/vendor/bootstrap/bootstrap.min.css' %}">
-            <link rel="stylesheet" href="{% static 'ar/css/main.css' %}">
-
-
-            {% block css %}
-                <link rel="stylesheet" href="{% static 'ar/css/index.css' %}">
-            
-            {% endblock css %} 
-    
+            <link rel="stylesheet" href="{% static 'ar/css/main.css' %}">    
         {% endif %}
+            {% block css %}
+                <link rel="stylesheet" href="{% static 'en/css/index.css' %}">
+        
+            {% endblock css %} 
 
         
         <!--=====================================
