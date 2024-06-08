@@ -81,3 +81,12 @@ class OrderDetail(models.Model):
        super(OrderDetail, self).save(*args, **kwargs) 
 
        
+class Coupon(models.Model):
+    code = models.CharField(max_length=25)
+    from_date=models.DateField(default=timezone.now)
+    to_date=models.DateField(default=timezone.now)
+    quantity = models.IntegerField()
+    value = models.FloatField()
+
+    def __str__(self):
+        return self.code

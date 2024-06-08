@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Order,OrderDetail,Cart,CartDetail
+from .models import Order,OrderDetail,Cart,CartDetail,Coupon
 
 class OrderAdmin(admin.ModelAdmin):
     list_display = ['order_code','order_status','order_date','delivery_date']
@@ -20,4 +20,6 @@ admin.site.register(Order,OrderAdmin)
 admin.site.register(OrderDetail,OrderDetailAdmin)
 admin.site.register(Cart)
 admin.site.register(CartDetail,CartDetailAdmin)
+admin.site.register(Coupon)
+
 
