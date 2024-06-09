@@ -175,3 +175,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 AUTHENTICATION_BACKENDS = ['accounts.backend.EmailBackend']
 
+
+CELERY_BROCKER_URL = 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
