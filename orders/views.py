@@ -43,7 +43,7 @@ def checkout(request):
 
     if  request.method == 'POST':
         code =request.POST['coupon']
-        # coupon = Coupon.objects.get(code=code)
+        # coupon = Coupon.objects.get(code=code) 
         coupon = get_object_or_404(Coupon, code=code)
         today_date = datetime.today().date()
         
@@ -53,7 +53,7 @@ def checkout(request):
                 discount = round(code_value,2)
                 total = cart.cart_total() - code_value
                 total = total + delivery_fee
-                html = render_to_string('include/checkout_table.html',{'cart':cart,'cart_detail':cart_detail,'delivery_fee':delivery_fee,'total':total,'sub_total':sub_total,'discount':discount})
+                html = render_to_string('include/checkout_table.html',{'cart':cart,'cart_detail':cart_detail,'delivery_fee':delivery_fee,'total':total,'sub_total':sub_total,'discount':discount,'code_value':code_value})
                 return JsonResponse({'result':html})
 
 
