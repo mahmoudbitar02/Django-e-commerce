@@ -8,11 +8,12 @@ from django.db.models import ExpressionWrapper,DecimalField,FloatField
 from.forms import ProductReviewForm
 from django.http import JsonResponse
 from django.template.loader import render_to_string
+from django.views.decorators.cache import cache_page
 
 
 # Create your views here.
 
-
+@cache_page(60*2)
 def query_debug (request):
     #data=Product.objects.filter(price__lte=55.83) # weniger oder gleich
     #data=Product.objects.filter(price__gte=55.83) # großer oder gleich
@@ -42,10 +43,10 @@ def query_debug (request):
      #   full_name= Concat('name',Value(' '),'flag') # zwei spalten zusammenführen WICHTIG: import Concat 
     #)
 
-    dis_price=ExpressionWrapper(F('price')*.8,output_field=DecimalField()) 
-    data=Product.objects.annotate(discount_price=dis_price) # füge neue Spalte mit dem neuen Prise 
+    # dis_price=ExpressionWrapper(F('price')*.8,output_field=DecimalField()) 
+    # data=Product.objects.annotate(discount_price=dis_price) # füge neue Spalte mit dem neuen Prise 
 
-
+    data = Product.objects.all()
 
 
     return render(request,'product/productlist.html',{'data':data})
@@ -109,11 +110,14 @@ class BrandList(ListView):
     #    return queryset
     
 
+from django.utils.decorators import method_decorator
+
 class BrandDetail(ListView):
     model=Product
     paginate_by = 20
     template_name ='product/brand_detail.html'
 
+    @method_decorator(cache_page(60*1))
     def get_queryset(self):
         brand = Brand.objects.get(slug=self.kwargs['slug'])
         queryset = Product.objects.filter(brand=brand)
