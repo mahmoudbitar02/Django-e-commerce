@@ -10,7 +10,7 @@ from .myfilter import ProductFilter
 from django_filters.rest_framework import DjangoFilterBackend
 
 
-
+ 
 @api_view(['GET'])
 def productlist_api(request):
     products=Product.objects.all()

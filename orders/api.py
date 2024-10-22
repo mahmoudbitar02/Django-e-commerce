@@ -49,7 +49,7 @@ class CartDetailCreateApi(generics.GenericAPIView): # GenericAPIView damit wir d
         data=CartSerializer(cart).data
         return Response({'cart':data})
 
-
+ 
     def post(self,request,*args,**kwargs):
         user = User.objects.get(username=self.kwargs['username'])
 
