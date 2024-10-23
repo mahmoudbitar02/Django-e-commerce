@@ -1,0 +1,34 @@
+version: '3.10'
+
+services:
+  djangoservices:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    container_name: mydjango
+
+  redis:
+    image: redis:alpine
+    container_name: redisserver
+
+  celery:
+    image: celery:alpine
+    container_name: celeryserver
+    command: celery -A project worker -l info
+    volumes:
+      - ./app/
+    restart: always
+    build: 
+      context: .
+    depends_on:
+      - djangoservices
+      - redis
+    environment:
+      - CELERY_BROKER_URL = 'redis://redis:6379/0
+      - cELERY_RESULT_BACKEND = 'redis://redis:6379/0
+
+volumes:
+  postgres_data:
