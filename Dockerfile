@@ -2,13 +2,13 @@
 FROM python:3.10.11-slim-buster
 
 # setup linux
-ENV PYTHONUNBUFFERED = 1
+ENV PYTHONUNBUFFERED=1
 
 # install needed libraries 
 RUN apt-get update && apt-get -y install libpq-dev gcc
 
 # create folder for project
-WORKDIR / app
+WORKDIR /app
 
 # copy requirements.txt file
 
@@ -20,5 +20,5 @@ RUN pip install -r /app/requirements.txt
 
 # copy all folder
 
-COPY . /app/
+COPY . /app/ 
 
