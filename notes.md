@@ -1,0 +1,2 @@
+- docker-compose run djangoserver python manage.py migrate
+- docker-compose run djangoserver python manage.py createsuperuser
