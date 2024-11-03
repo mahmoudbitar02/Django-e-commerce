@@ -62,6 +62,7 @@ REST_FRAMEWORK = {
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     "django.middleware.locale.LocaleMiddleware",
     'django.middleware.common.CommonMiddleware',
@@ -204,3 +205,10 @@ CACHES = {
 
 STRIPE_PUBLISHABLE_KEY = 'pk_test_51QG0QgCQpBZYDCacum2mpB0vYjtsKR9stwA0APRAY32vdahUa7IIzZVqbd31hmXcYyxplTg9ShMyndFPftYHStTO005evx2QmA'
 STRIPE_SECRET_KEY = 'sk_test_51QG0QgCQpBZYDCacrom4c5kOweK2r1Knhr4J9gYSeJtkNfIex23B3nOJU4uWfdgc8FGhXv9nZQ3ZukW4Qne2YxSn00mI69AUNv'
+
+STORAGES = {
+    # ...
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
