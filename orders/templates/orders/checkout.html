@@ -250,12 +250,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="checkout-check">
-                                <input type="checkbox" id="checkout-check">
-                                <label for="checkout-check">By making this purchase you agree to our <a href="#">Terms and Conditions</a>.</label>
-                            </div>
+                            
                             <div class="checkout-proced">
-                                <a href="invoice.html" class="btn btn-inline">proced to checkout</a>
+                                <!-- <a href="invoice.html" class="btn btn-inline"></a> -->
+                                <button id="checkout-button" class="btn btn-inline">proced to checkout</button>
                             </div>
                         </div>
                     </div>
@@ -413,12 +411,12 @@
 
             <div class=" container mt-5">
                 <script src="https://js.stripe.com/v3/"></script>
-                <button id="checkout-button">Pay Now</button>
+                
                 <script>
                 var stripe = Stripe('pk_test_51QG0QgCQpBZYDCacum2mpB0vYjtsKR9stwA0APRAY32vdahUa7IIzZVqbd31hmXcYyxplTg9ShMyndFPftYHStTO005evx2QmA');
                 document.getElementById('checkout-button').addEventListener('click', function() {
                     // Get the amount from the input field
-                    var amount = 100;
+                    var amount = parseFloat('{{cart.cart_total}}')*100;
                     console.log(amount)
                     
                     // Call the create_checkout_session view to create a new session

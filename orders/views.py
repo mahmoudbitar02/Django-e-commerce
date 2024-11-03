@@ -88,13 +88,31 @@ class CreateCheckoutSessionView(View):
                 'quantity': 1,
             }],
             mode='payment',
-            success_url='https://example.com/success',
-            cancel_url='https://example.com/fail',
+            success_url='http://127.0.0.1:8000/orders/payment/success',
+            cancel_url='http://127.0.0.1:8000/orders/payment/fail',
         )
 
         # Return the session ID as a JSON response
         return JsonResponse({'sessionId': session.id})
 
 
+def payment_success(request):
+    cart = Cart.objects.get(user = request.user, cart_status='Inprogress')
+    cart_detail = CartDetail.objects.filter(cart=cart)
+    
+    new_order=Order.objects.create(user = request.user)
+    for item in cart_detail:
+        OrderDetail.objects.create(
+            order = new_order,
+            product = item.product,
+            price = item.price,
+            quantity=item.quantity,
+            total=item.total,
+        )
+    cart.cart_status='Completed'
+    cart.save()
+    return redirect('/')
+def payment_fail(request):
 
+    pass
 
