@@ -209,8 +209,10 @@ STRIPE_PUBLISHABLE_KEY = 'pk_test_51QG0QgCQpBZYDCacum2mpB0vYjtsKR9stwA0APRAY32vd
 STRIPE_SECRET_KEY = 'sk_test_51QG0QgCQpBZYDCacrom4c5kOweK2r1Knhr4J9gYSeJtkNfIex23B3nOJU4uWfdgc8FGhXv9nZQ3ZukW4Qne2YxSn00mI69AUNv'
 
 STORAGES = {
-    # ...
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
     "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
     },
 }
