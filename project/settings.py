@@ -207,7 +207,7 @@ CACHES = {
 
 STRIPE_PUBLISHABLE_KEY = 'pk_test_51QG0QgCQpBZYDCacum2mpB0vYjtsKR9stwA0APRAY32vdahUa7IIzZVqbd31hmXcYyxplTg9ShMyndFPftYHStTO005evx2QmA'
 STRIPE_SECRET_KEY = 'sk_test_51QG0QgCQpBZYDCacrom4c5kOweK2r1Knhr4J9gYSeJtkNfIex23B3nOJU4uWfdgc8FGhXv9nZQ3ZukW4Qne2YxSn00mI69AUNv'
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage" 
 # STORAGES = {
 #     "default": {
 #         "BACKEND": "django.core.files.storage.FileSystemStorage",
@@ -216,3 +216,5 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 #         "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
 #     },
 # }
+
+CSRF_TRUSTED_ORIGINS = ['https://sublime-courage-production.up.railway.app/']
