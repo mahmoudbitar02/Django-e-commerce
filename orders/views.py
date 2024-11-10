@@ -88,7 +88,7 @@ class CreateCheckoutSessionView(View):
                 'quantity': 1,
             }],
             mode='payment',
-            success_url='http://127.0.0.1:8000/orders/payment/success',
+            success_url='https://sublime-courage-production.up.railway.app/orders/payment/success',
             cancel_url='http://127.0.0.1:8000/orders/payment/fail',
         )
 
